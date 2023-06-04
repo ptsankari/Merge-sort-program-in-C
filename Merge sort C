@@ -1,0 +1,62 @@
+// There are many merge sort programs all over the internet with different approaches
+but I find this approach and program easily understandable ..So check it out
+
+//Check out the youtube video https://www.youtube.com/watch?v=LeWuki7AQLo by Portfolio courses
+
+
+#include <stdio.h>
+void ms(int a[],int n);
+void msr(int a[],int l,int r);
+void msa(int a[],int l,int m,int r);
+
+int main() {
+    int arr[]={8,7,6,5,4,3,2,1};
+    int n=8;
+    
+    ms(arr,n); 
+    printf("Sorted array:\n");
+    for(int i=0;i<n;i++){
+        printf("%d\t",arr[i]);
+    }
+    return 0;
+}
+    void ms(int a[],int n){
+        msr(a,0,n-1);
+    }
+    void msr(int a[],int l,int r){
+        if(l<r){
+        int m=l+(r-l)/2; //mid value;
+        msr(a,l,m);
+        msr(a,m+1,r);
+        
+        msa(a,l,m,r);
+        }
+    }
+    void msa(int a[],int l,int m,int r){
+        int leftlen=m-l+1;
+        int rightlen=r-m;
+        
+        int templeft[leftlen];
+        int tempright[rightlen];
+        
+        int i,j,k;
+        for(i=0;i<leftlen;i++){
+            templeft[i]=a[l+i];
+        }
+        
+        for(i=0;i<rightlen;i++){
+            tempright[i]=a[m+1+i];
+        }
+        
+        for(i=0,j=0,k=l;k<=r;k++){
+            if((i<leftlen)&&(j>=rightlen)||templeft[i]<=tempright[j]){
+                a[k]=templeft[i];
+                i++;
+            }
+            else{
+                a[k]=tempright[j];
+                j++;
+            }
+        }
+        
+    }
